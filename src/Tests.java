@@ -10,6 +10,7 @@ import java.util.Locale;
 
 import org.junit.Before;
 import org.junit.Test;
+//import org.testng.annotations.Test;
 
 /**
  * A classe Tests especifica um conjunto de testes implementado recorrendo à ferramenta 
