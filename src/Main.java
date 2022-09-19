@@ -13,6 +13,8 @@ public class Main {
     public static final String SET_PHONE      = "SP";
     public static final String SET_EMAIL      = "SE";
     public static final String LIST_CONTACTS  = "LC";
+
+    public static final String REPEATED_PHONES           = "EP";
     public static final String QUIT           = "Q";
 
     //Constantes que definem as mensagens para o utilizador
@@ -22,6 +24,7 @@ public class Main {
     public static final String CONTACT_REMOVED = "contactBook.Contact removed.";
     public static final String CONTACT_UPDATED = "contactBook.Contact updated.";
     public static final String BOOK_EMPTY = "contactBook.Contact book empty.";
+    public static final String DIFFERENT_PHONE_NUMBERS = "All contacts have different phone numbers.";
     public static final String QUIT_MSG = "Goodbye!";
     public static final String COMMAND_ERROR = "Unknown command.";
 
@@ -52,6 +55,9 @@ public class Main {
                     break;
                 case LIST_CONTACTS:
                     listAllContacts(cBook);
+                    break;
+                case REPEATED_PHONES:
+                    repeatedPhones(cBook);
                     break;
                 default:
                     System.out.println(COMMAND_ERROR);
@@ -146,5 +152,21 @@ public class Main {
             }
         }
         else System.out.println(BOOK_EMPTY);
+    }
+
+    private static void repeatedPhones(ContactBook contactBook){
+        if (contactBook.getNumberOfContacts() != 0) {
+            contactBook.initializeIterator();
+            int counterRepeatedNumbers = 0;
+            while( contactBook.hasNext() ) {
+                Contact c = contactBook.next();
+                counterRepeatedNumbers = contactBook.manyTimesExistsNumber(c.getPhone());
+            }
+            if(counterRepeatedNumbers > 1)
+                System.out.println("There are contacts that share phone numbers.");
+            else
+                System.out.println(DIFFERENT_PHONE_NUMBERS);
+        }
+        else System.out.println(DIFFERENT_PHONE_NUMBERS);
     }
 }

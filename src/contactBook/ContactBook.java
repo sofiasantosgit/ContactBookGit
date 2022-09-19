@@ -94,6 +94,18 @@ public class ContactBook {
         return result;
     }
 
+    public int manyTimesExistsNumber(int phone){
+        int i = 0;
+        int times = 0;
+        while (i<counter) {
+            if (contacts[i].getPhone() == phone)
+                times++;
+            i++;
+        }
+        return times;
+
+    }
+
     private void resize() {
         Contact tmp[] = new Contact[2*contacts.length];
         for (int i=0;i<counter; i++)
